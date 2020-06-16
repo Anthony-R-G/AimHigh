@@ -55,19 +55,11 @@ class PersonDetailViewController: UIViewController {
     
     //2nd row right-side label pair
     lazy var rightUntitledTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Untitled:"
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = .white
-        return label
+        Utilities.createPersonDetailLabel(isTitle: true, text: "Untitled:")
     }()
     
     lazy var rightUntitledDetailLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Untitled"
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = .white
-        return label
+        Utilities.createPersonDetailLabel(isTitle: false, text: "Untitled")
     }()
     
     
@@ -85,6 +77,10 @@ class PersonDetailViewController: UIViewController {
     
     @objc private func summaryButtonPressed() {
         print("Pressed summary button")
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
 
