@@ -1,0 +1,23 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'AimHigh' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for AimHigh
+pod 'Firebase/Firestore'
+pod 'Firebase/Auth'
+pod 'Firebase/Storage'
+pod 'Kingfisher', '~> 5.13'
+
+  target 'AimHighTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'AimHighUITests' do
+    # Pods for testing
+  end
+
+end
