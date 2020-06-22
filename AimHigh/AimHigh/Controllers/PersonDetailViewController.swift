@@ -10,7 +10,7 @@ import UIKit
 
 class PersonDetailViewController: UIViewController {
     //MARK: --TODO:
-    //Textured background in different colors. Possibly using an enum.
+    //Textured background in different colors. Possibly using an enum switching on the category person is in.
     //Get image assets for social media buttons.
     //Monochrome filter for bitmojis/person images (done externally)
     //Find new comic-y font.
@@ -80,6 +80,12 @@ class PersonDetailViewController: UIViewController {
         return button
     }()
     
+    lazy var diagonalCornerView: CustomShapeView = {
+        let cv = CustomShapeView()
+        cv.color = .white
+        return cv
+    }()
+    
     //TEMPORARY. Better implementation later using a separate, more stylized vc.
     @objc private func summaryButtonPressed() {
         Utilities.showAlert(vc: self, message: "Alexandria Ocasio-Cortez, also known as AOC, attended Boston University and graduated with degrees in Economics and International Relations. She serves as the U.S. Representative for New York's 14th congressional district.")
@@ -100,7 +106,7 @@ class PersonDetailViewController: UIViewController {
 //MARK: -- Constraints Extension
 extension PersonDetailViewController {
     private func setConstraints() {
-        let UIElements = [nameLabel, professionTitleLabel, professionDetailLabel, originTitleLabel, originDetailLabel, summaryButton, educationTitleLabel, educationDetailLabel, rightUntitledTitleLabel, rightUntitledDetailLabel]
+        let UIElements = [nameLabel, professionTitleLabel, professionDetailLabel, originTitleLabel, originDetailLabel, summaryButton, educationTitleLabel, educationDetailLabel, rightUntitledTitleLabel, rightUntitledDetailLabel, diagonalCornerView]
         
         UIElements.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
         UIElements.forEach({view.addSubview($0)})
@@ -115,6 +121,7 @@ extension PersonDetailViewController {
         setRightUntitledTitleLabelConstraints()
         setRightUntitledDetailLabelConstraints()
         setSummaryButtonConstraints()
+        setDiagonalCornerViewConstraints()
         
     }
     
@@ -209,6 +216,15 @@ extension PersonDetailViewController {
             summaryButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             summaryButton.widthAnchor.constraint(equalToConstant: 350),
             summaryButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    private func setDiagonalCornerViewConstraints() {
+        NSLayoutConstraint.activate([
+            diagonalCornerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            diagonalCornerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            diagonalCornerView.heightAnchor.constraint(equalToConstant: 250),
+            diagonalCornerView.widthAnchor.constraint(equalToConstant: 300)
         ])
     }
 }
