@@ -9,6 +9,11 @@
 import UIKit
 
 class PersonDetailViewController: UIViewController {
+    //MARK: --TODO:
+    //Textured background in different colors. Possibly using an enum.
+    //Get image assets for social media buttons.
+    //Monochrome filter for bitmojis/person images (done externally)
+    //Find new comic-y font.
     
     //MARK: -- Lazy Variable Declaration
     
@@ -55,19 +60,11 @@ class PersonDetailViewController: UIViewController {
     
     //2nd row right-side label pair
     lazy var rightUntitledTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Untitled:"
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        label.textColor = .white
-        return label
+        Utilities.createPersonDetailLabel(isTitle: true, text: "Untitled:")
     }()
     
     lazy var rightUntitledDetailLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Untitled"
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.textColor = .white
-        return label
+        Utilities.createPersonDetailLabel(isTitle: false, text: "Untitled")
     }()
     
     
@@ -83,8 +80,13 @@ class PersonDetailViewController: UIViewController {
         return button
     }()
     
+    //TEMPORARY. Better implementation later using a separate, more stylized vc.
     @objc private func summaryButtonPressed() {
-        print("Pressed summary button")
+        Utilities.showAlert(vc: self, message: "Alexandria Ocasio-Cortez, also known as AOC, attended Boston University and graduated with degrees in Economics and International Relations. She serves as the U.S. Representative for New York's 14th congressional district.")
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
 
@@ -108,8 +110,8 @@ extension PersonDetailViewController {
         setProfessionDetailLabelConstraints()
         setOriginTitleLabelConstraints()
         setOriginDetailLabelConstraints()
-        setUntitledTitleLabelConstraints()
-        setUntitledDetailLabelConstraints()
+        setEducationTitleLabelConstraints()
+        setEducationDetailLabelConstraints()
         setRightUntitledTitleLabelConstraints()
         setRightUntitledDetailLabelConstraints()
         setSummaryButtonConstraints()
@@ -163,7 +165,7 @@ extension PersonDetailViewController {
     }
     
     //Education Label Pair
-    private func setUntitledTitleLabelConstraints() {
+    private func setEducationTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             educationTitleLabel.leadingAnchor.constraint(equalTo: professionTitleLabel.leadingAnchor),
             educationTitleLabel.topAnchor.constraint(equalTo: professionTitleLabel.bottomAnchor, constant: 30),
@@ -172,7 +174,7 @@ extension PersonDetailViewController {
         ])
     }
     
-    private func setUntitledDetailLabelConstraints() {
+    private func setEducationDetailLabelConstraints() {
         NSLayoutConstraint.activate([
             educationDetailLabel.leadingAnchor.constraint(equalTo: educationTitleLabel.trailingAnchor),
             educationDetailLabel.topAnchor.constraint(equalTo: educationTitleLabel.topAnchor),
